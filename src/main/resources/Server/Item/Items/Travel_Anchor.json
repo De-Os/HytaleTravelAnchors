@@ -1,0 +1,75 @@
+{
+  "TranslationProperties": {
+    "Name": "Travel Anchor",
+    "Description": "To teleport look at it while standing on another anchor"
+  },
+  "Icon": "Icons/ItemsGenerated/Travel_Anchor.png",
+  "Set": "Rock_Shale_Brick",
+  "Recipe": {
+    "Input": [
+      {
+        "Quantity": 1,
+        "ResourceTypeId": "Rock_Shale"
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Builders",
+        "Type": "StructuralCrafting",
+        "Categories": [
+          "Bricks"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 0
+  },
+  "BlockType": {
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "ParticleColor": "#3d4a52",
+    "Textures": [
+      {
+        "All": "BlockTextures/Travel_Anchor.png"
+      }
+    ],
+    "Material": "Solid",
+    "Group": "TravelAnchors",
+    "Interactions": {
+      "Use": "Open_Processing_Bench"
+    }
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Bricks"
+    },
+    {
+      "Id": "Rock_Shale_Brick"
+    }
+  ],
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Shale"
+    ]
+  },
+  "Parent": "Rock_Stone_Brick",
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

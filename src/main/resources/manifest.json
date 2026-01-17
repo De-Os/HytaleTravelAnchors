@@ -1,0 +1,20 @@
+{
+  "Group": "deos",
+  "Name": "TravelAnchors",
+  "Version": "1.0.0",
+  "Description": "Anchors for fast traveling through base and elevator purposes",
+  "Authors": [
+    {
+      "Name": "Alexander Vinogradov",
+      "Email": "al3taibi@yandex.ru",
+      "Url": "https://deos-dev.ru"
+    }
+  ],
+  "Website": "https://deos-dev.ru",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": true,
+  "Main": "dev.deos.TravelAnchors"
+}
