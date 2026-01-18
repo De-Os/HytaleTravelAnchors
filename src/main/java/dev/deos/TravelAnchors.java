@@ -1,10 +1,12 @@
 package dev.deos;
 
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.util.Config;
+import dev.deos.Interactions.TravelAnchorUseInteraction;
 import dev.deos.handlers.BlockBreakHandler;
 import dev.deos.handlers.BlockPlaceHandler;
 import dev.deos.handlers.MovementHandler;
@@ -34,6 +36,11 @@ public class TravelAnchors extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new BlockBreakHandler());
         this.getEntityStoreRegistry().registerSystem(new PreUseBlockEventHandler());
 
+        this.getCodecRegistry(Interaction.CODEC).register(
+                "Travel_Anchor_Use_Interaction",
+                TravelAnchorUseInteraction.class,
+                TravelAnchorUseInteraction.CODEC
+        );
         TravelAnchors.config.save();
     }
 

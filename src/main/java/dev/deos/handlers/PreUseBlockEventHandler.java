@@ -36,7 +36,7 @@ public class PreUseBlockEventHandler extends EntityEventSystem<EntityStore, UseB
         PlayerRef playerRef = archetypeChunk.getComponent(index, PlayerRef.getComponentType());
         Player player = archetypeChunk.getComponent(index, Player.getComponentType());
 
-        if (playerRef == null || player == null) {
+        if (playerRef == null || player == null || playerRef.getReference() == null) {
             return;
         }
 
