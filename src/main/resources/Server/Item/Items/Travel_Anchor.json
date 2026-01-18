@@ -1,28 +1,32 @@
 {
   "TranslationProperties": {
     "Name": "Travel Anchor",
-    "Description": "To teleport look at it while standing on another anchor"
+    "Description": "Use placed anchor to discover nearby anchors. Also functions as elevator. To see anchor in nearby anchors list dont forget to set its name (Rename button)"
   },
   "Icon": "Icons/ItemsGenerated/Travel_Anchor.png",
-  "Set": "Rock_Shale_Brick",
+  "Quality": "Rare",
   "Recipe": {
+    "TimeSeconds": 3,
+    "KnowledgeRequired": false,
     "Input": [
       {
-        "Quantity": 1,
+        "Quantity": 8,
         "ResourceTypeId": "Rock_Shale"
+      },
+      {
+        "ItemId": "Ingredient_Void_Essence",
+        "Quantity": 2
       }
     ],
     "BenchRequirement": [
       {
-        "Id": "Builders",
-        "Type": "StructuralCrafting",
+        "Id": "Arcanebench",
+        "Type": "Crafting",
         "Categories": [
-          "Bricks"
+          "Arcane_Portals"
         ]
       }
-    ],
-    "OutputQuantity": 1,
-    "TimeSeconds": 0
+    ]
   },
   "BlockType": {
     "Gathering": {

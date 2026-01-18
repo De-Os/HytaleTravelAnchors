@@ -44,12 +44,12 @@ public class TravelAnchors extends JavaPlugin {
         TravelAnchors.config.save();
     }
 
-    protected void start(){
+    protected void start() {
         TravelAnchors.storage = new TravelAnchorsStorage(Universe.get().getPath());
     }
 
     protected void shutdown() {
-        if(TravelAnchors.storage != null){
+        if (TravelAnchors.storage != null) {
             TravelAnchors.storage.save();
             TravelAnchors.LOGGER.atInfo().log("Saved anchors: " + TravelAnchorsStorage.anchorLocationMap.size());
         }

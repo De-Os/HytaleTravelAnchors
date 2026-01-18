@@ -1,0 +1,100 @@
+$Common = "Common.ui";
+
+@Background = PatchStyle(TexturePath: "TravelAnchorsGuiBack.png");
+
+Group {
+  LayoutMode: Middle;
+
+  Anchor: (Width: 800, Vertical: 1);
+
+  Group #TalPanel {
+    Background: @Background;
+    Anchor: (Width: 400, Vertical: 1, Top: 10, Bottom: 10);
+    LayoutMode: Top;
+    Visible: true;
+
+    Label #TalLabel {
+      Anchor: (Top: 10);
+      Style: (FontSize: 22, Alignment: Center, RenderBold: true);
+      Text: "Nearby anchors list";
+      Padding: (Full: 10);
+    }
+
+    Label #RenameCurrentLabel {
+      Anchor: (Top: 5);
+      Style: (FontSize: 15, Alignment: Center, RenderBold: true, TextColor: #DE1B1B);
+      Text: "Dont forget to set name for current anchor";
+    }
+
+    Label #RenameCurrentLabelSecondary {
+      Anchor: (Top: 3);
+      Style: (FontSize: 15, Alignment: Center, RenderBold: true, TextColor: #DE1B1B);
+      Text: "if you want to use not only as elevator";
+    }
+
+    Label #RenameCurrentLabelThird {
+      Anchor: (Top: 3);
+      Style: (FontSize: 13, Alignment: Center, RenderBold: true, TextColor: #DE1B1B);
+      Text: "(without name it wont appear in nearby anchors list)";
+    }
+
+    Label #NoNearbyAnchorsLabel {
+      Anchor: (Top: 10);
+      Style: (FontSize: 18, Alignment: Center, RenderBold: true, TextColor: #5B6D8B);
+      Text: "There are no anchors nearby";
+      Padding: (Full: 10);
+      Visible: false;
+    }
+
+    Group #TaList {
+      Anchor: (Width: 300, Vertical: 1, Top: 10, Bottom: 10);
+      Padding: (Full: 10);
+      LayoutMode: Top;
+    }
+
+    $Common.@SecondaryTextButton #SettingsButton {
+      Anchor: (Top: 10, Width: 200, Height: 42);
+      Padding: (Full: 10);
+      Text: "Rename current";
+    }
+
+    $Common.@SecondaryTextButton #BackButton {
+      Anchor: (Top: 10, Bottom: 20, Width: 150, Height: 42);
+      Padding: (Full: 10);
+      Text: %client.general.button.back;
+    }
+  }
+
+  Group #TasPanel {
+      Background: @Background;
+      Anchor: (Width: 400, Vertical: 1, Top: 10, Bottom: 10);
+      LayoutMode: Top;
+      Visible: false;
+
+      Label #TalLabel {
+        Anchor: (Top: 10);
+        Style: (FontSize: 22, Alignment: Center, RenderBold: true);
+        Text: "Enter new anchor name";
+        Padding: (Full: 10);
+      }
+
+      TextField #TasInput {
+        Style: $Common.@DefaultInputFieldStyle;
+        Background: $Common.@InputBoxBackground;
+        Anchor: (Top: 10, Width: 200, Height: 50);
+        Padding: (Full: 10);
+      }
+
+      $Common.@TextButton #SaveButton {
+        Anchor: (Top: 10, Width: 150, Height: 42);
+        Padding: (Full: 10);
+        Text: %client.general.button.save;
+      }
+
+      $Common.@SecondaryTextButton #ReturnButton {
+        Anchor: (Top: 10, Bottom: 20, Width: 150, Height: 42);
+        Padding: (Full: 10);
+        Text: %client.general.button.back;
+      }
+    }
+}

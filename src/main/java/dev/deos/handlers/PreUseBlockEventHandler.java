@@ -5,6 +5,7 @@ import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.EntityEventSystem;
+import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.server.core.entity.entities.Player;
@@ -14,7 +15,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import dev.deos.TravelAnchors;
 import dev.deos.TravelAnchorsStorage;
-import dev.deos.UI.TravelAnchorUI;
+import dev.deos.UI.TravelAnchorListUI;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -60,12 +61,22 @@ public class PreUseBlockEventHandler extends EntityEventSystem<EntityStore, UseB
             player.getPageManager().openCustomPage(
                     playerRef.getReference(),
                     store,
-                    new TravelAnchorUI(
+                    new TravelAnchorListUI(
                             playerRef,
                             CustomPageLifetime.CanDismissOrCloseThroughInteraction,
                             loc.anchorName == null ? "" : loc.anchorName,
-                            loc.uuid
+                            loc.uuid,
+                            TravelAnchors.getStorage().getAnchorsAround(
+                                    new Vector3d(pos.getX(), pos.getY(), pos.getZ()),
+                                    world.getName()
+                            )
                     )
+//                    new TravelAnchorSettingsUI(
+//                            playerRef,
+//                            CustomPageLifetime.CanDismissOrCloseThroughInteraction,
+//                            loc.anchorName == null ? "" : loc.anchorName,
+//                            loc.uuid
+//                    )
             );
         });
     }
