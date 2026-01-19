@@ -79,7 +79,6 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
 
             int addition = movementStatesComponent.getMovementStates().crouching ? -1 : 1;
             for (int tempY = playerY + addition * 2; (tempY <= MAX_WORLD_HEIGHT_Y && tempY >= 0); tempY += addition) {
-                TravelAnchors.LOGGER.atInfo().log("Looking for x=" + playerX + " y=" + tempY + " z=" + playerZ);
                 if (isTravelAnchor(world, playerX, tempY, playerZ)) {
                     if (teleport(
                             entityStore,
