@@ -120,7 +120,8 @@ public class TravelAnchorListUI extends InteractiveCustomUIPage<TravelAnchorList
                         world,
                         store,
                         (int) travelAnchor.x, (int) travelAnchor.y, (int) travelAnchor.z,
-                        store.getComponent(ref, PlayerRef.getComponentType()).getHeadRotation()
+                        store.getComponent(ref, PlayerRef.getComponentType()).getHeadRotation(),
+                        playerRef.getUsername()
                 );
             });
 

@@ -14,12 +14,18 @@ import com.hypixel.hytale.server.core.modules.entity.teleport.Teleport;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import dev.deos.TravelAnchors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashMap;
 
 public class MovementHandler extends EntityTickingSystem<EntityStore> {
     public static final int MAX_WORLD_HEIGHT_Y = 320;
+    public static final int TELEPORT_COOLDOWN_MS = 300;
+
+    public static HashMap<String, Long> cooldowns = new HashMap<>();
+
 
     private final ComponentType<EntityStore, MovementStatesComponent> movementType;
     private final ComponentType<EntityStore, TransformComponent> transformType;
@@ -42,6 +48,10 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
         PlayerRef playerRef = commandBuffer.getComponent(entityStore, PlayerRef.getComponentType());
 
         if (playerRef == null) {
+            return;
+        }
+
+        if(isOnCooldown(playerRef.getUsername())){
             return;
         }
 
@@ -69,13 +79,15 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
 
             int addition = movementStatesComponent.getMovementStates().crouching ? -1 : 1;
             for (int tempY = playerY + addition * 2; (tempY <= MAX_WORLD_HEIGHT_Y && tempY >= 0); tempY += addition) {
+                TravelAnchors.LOGGER.atInfo().log("Looking for x=" + playerX + " y=" + tempY + " z=" + playerZ);
                 if (isTravelAnchor(world, playerX, tempY, playerZ)) {
                     if (teleport(
                             entityStore,
                             world,
                             store,
                             playerX, tempY, playerZ,
-                            playerRef.getHeadRotation()
+                            playerRef.getHeadRotation(),
+                            playerRef.getUsername()
                     )) {
                         return;
                     }
@@ -96,11 +108,14 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
             World world,
             Store<EntityStore> store,
             int x, int y, int z,
-            Vector3f rotation
+            Vector3f rotation,
+            String username
     ) {
         if (!canTeleportTo(world, x, y, z)) {
             return false;
         }
+
+        setCooldown(username);
 
         Teleport teleport = new Teleport(world, new Vector3d(x + 0.5, y + 1, z + 0.5), rotation);
 
@@ -109,6 +124,14 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
         });
 
         return true;
+    }
+
+    public static boolean isOnCooldown(String username){
+        return cooldowns.containsKey(username) && cooldowns.get(username) >= System.currentTimeMillis();
+    }
+
+    public static void setCooldown(String username){
+        cooldowns.put(username, System.currentTimeMillis() + (long) TELEPORT_COOLDOWN_MS);
     }
 
     public static boolean isTravelAnchor(World world, int x, int y, int z) {

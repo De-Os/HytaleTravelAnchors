@@ -124,7 +124,19 @@ public class TravelAnchorsStorage {
         int maxDistance = TravelAnchors.getConfig().maximumDistance;
         double maxDistSq = Math.pow(maxDistance, 2);
         return anchorLocationMap
-                .stream().filter(p -> distToCenterSqr(p, pos.getX(), pos.getY(), pos.getZ()) < maxDistSq)
+                .stream().filter(p -> p.distToCenter(pos.getX(), pos.getY(), pos.getZ()) < maxDistSq && p.worldName.equals(worldName))
+                .sorted((o1, o2) -> {
+                    double firstDist = o1.distToCenter(pos.getX(), pos.getY(), pos.getZ());
+                    double secondDist = o2.distToCenter(pos.getX(), pos.getY(), pos.getZ());
+
+                    if (firstDist < secondDist) {
+                        return -1;
+                    } else if (firstDist > secondDist) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                })
                 .toList();
     }
 
@@ -169,6 +181,13 @@ public class TravelAnchorsStorage {
             this.x = x;
             this.y = y;
             this.z = z;
+        }
+
+        public double distToCenter(double compareX, double compareY, double compareZ) {
+            double d0 = x + (double) 0.5F - compareX;
+            double d1 = y + (double) 0.5F - compareY;
+            double d2 = z + (double) 0.5F - compareZ;
+            return d0 * d0 + d1 * d1 + d2 * d2;
         }
 
         @Override
