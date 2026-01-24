@@ -126,7 +126,7 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
 
         setCooldown(username);
 
-        Teleport teleport = new Teleport(world, new Vector3d(x + 0.5, y + 1, z + 0.5), new Vector3f(0F, rotation.getYaw(), 0F));
+        Teleport teleport = Teleport.createForPlayer(world, new Vector3d(x + 0.5, y + 1, z + 0.5), rotation);
 
         world.execute(() -> {
             store.addComponent(entityStore, Teleport.getComponentType(), teleport);
