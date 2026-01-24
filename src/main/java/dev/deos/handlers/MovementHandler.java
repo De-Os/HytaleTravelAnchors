@@ -6,11 +6,13 @@ import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.vector.Transform;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector3f;
+import com.hypixel.hytale.protocol.MovementStates;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.movement.MovementStatesComponent;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import com.hypixel.hytale.server.core.modules.entity.teleport.Teleport;
+import com.hypixel.hytale.server.core.modules.interaction.BlockInteractionUtils;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -68,7 +70,9 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
 
         World world = store.getExternalData().getWorld();
 
-        if (!movementStatesComponent.getMovementStates().jumping && !movementStatesComponent.getMovementStates().crouching) {
+        MovementStates movementStates = movementStatesComponent.getMovementStates();
+
+        if (!movementStates.jumping && !movementStates.crouching) {
             return;
         }
 
@@ -77,7 +81,7 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
                 return;
             }
 
-            int addition = movementStatesComponent.getMovementStates().crouching ? -1 : 1;
+            int addition = movementStates.crouching ? -1 : 1;
             for (int tempY = playerY + addition * 2; (tempY <= MAX_WORLD_HEIGHT_Y && tempY >= 0); tempY += addition) {
                 if (isTravelAnchor(world, playerX, tempY, playerZ)) {
                     if (teleport(
@@ -88,6 +92,12 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
                             playerRef.getHeadRotation(),
                             playerRef.getUsername()
                     )) {
+                        if(movementStates.crouching){
+                            movementStates.crouching = false;
+                        }
+                        if(movementStates.jumping){
+                            movementStates.jumping = false;
+                        }
                         return;
                     }
                 }
@@ -116,7 +126,7 @@ public class MovementHandler extends EntityTickingSystem<EntityStore> {
 
         setCooldown(username);
 
-        Teleport teleport = new Teleport(world, new Vector3d(x + 0.5, y + 1, z + 0.5), rotation);
+        Teleport teleport = new Teleport(world, new Vector3d(x + 0.5, y + 1, z + 0.5), new Vector3f(0F, rotation.getYaw(), 0F));
 
         world.execute(() -> {
             store.addComponent(entityStore, Teleport.getComponentType(), teleport);

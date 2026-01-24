@@ -152,13 +152,6 @@ public class TravelAnchorsStorage {
         return filtered.getFirst();
     }
 
-    private double distToCenterSqr(TravelAnchorLocation location, double x, double y, double z) {
-        double d0 = location.x + (double) 0.5F - x;
-        double d1 = location.y + (double) 0.5F - y;
-        double d2 = location.z + (double) 0.5F - z;
-        return d0 * d0 + d1 * d1 + d2 * d2;
-    }
-
     public static class TravelAnchorLocation {
         public String worldName;
         public String uuid;
