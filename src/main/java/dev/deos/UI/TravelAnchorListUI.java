@@ -107,8 +107,6 @@ public class TravelAnchorListUI extends InteractiveCustomUIPage<TravelAnchorList
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull TravelAnchorListUI.TravelAnchorUIPageData data) {
         super.handleDataEvent(ref, store, data);
 
-        TravelAnchors.LOGGER.atInfo().log("Got event: " + data);
-
         if (!data.getAnchorUUID().isEmpty()) {
             TravelAnchorsStorage.TravelAnchorLocation travelAnchor = TravelAnchors.getStorage().isTravelAnchorExists(data.getAnchorUUID());
 

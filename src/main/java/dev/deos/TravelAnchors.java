@@ -10,7 +10,6 @@ import dev.deos.Interactions.TravelAnchorUseInteraction;
 import dev.deos.handlers.BlockBreakHandler;
 import dev.deos.handlers.BlockPlaceHandler;
 import dev.deos.handlers.MovementHandler;
-import dev.deos.handlers.PreUseBlockEventHandler;
 
 import javax.annotation.Nonnull;
 
@@ -34,7 +33,6 @@ public class TravelAnchors extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new MovementHandler());
         this.getEntityStoreRegistry().registerSystem(new BlockPlaceHandler());
         this.getEntityStoreRegistry().registerSystem(new BlockBreakHandler());
-        this.getEntityStoreRegistry().registerSystem(new PreUseBlockEventHandler());
 
         this.getCodecRegistry(Interaction.CODEC).register(
                 "Travel_Anchor_Use_Interaction",

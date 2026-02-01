@@ -43,11 +43,7 @@
     "Material": "Solid",
     "Group": "TravelAnchors",
     "Interactions": {
-      "Use": {
-        "Interactions": {
-          "Type": "Travel_Anchor_Use_Interaction"
-        }
-      }
+      "Use": "Travel_Anchor_Open_List_Interaction"
     }
   },
   "ResourceTypes": [
