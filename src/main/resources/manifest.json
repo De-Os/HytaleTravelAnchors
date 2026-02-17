@@ -1,7 +1,8 @@
 {
   "Group": "deos",
   "Name": "TravelAnchors",
-  "Version": "1.0.3",
+  "Version": "1.0.3.1",
+  "ServerVersion": "2026.02.17-255364b8e",
   "Description": "Anchors for fast traveling through base and elevator purposes",
   "Authors": [
     {
@@ -11,7 +12,6 @@
     }
   ],
   "Website": "https://deos-dev.ru",
-  "ServerVersion": "*",
   "Dependencies": {},
   "OptionalDependencies": {},
   "DisabledByDefault": false,
